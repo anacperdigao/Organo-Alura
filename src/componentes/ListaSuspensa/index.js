@@ -12,3 +12,8 @@ const ListaSuspensa = (props) => {
 }
 
 export default ListaSuspensa
+
+//Aqui o metodo map vai percorrer minha lista suspensa e me retornar a lista que eu quero das opções.
+//Então diferente do forEach, o map percorre o array mas modifica ele.
+//A key utilizada foi solicitada pelo proprio react que diz que o ideal é ter uma chave para cada item da lista.
+//E para a key eu to usando o mesmo nome do proprio item da lista.

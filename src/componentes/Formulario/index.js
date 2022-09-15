@@ -2,19 +2,9 @@ import './Formulario.css'
 import CampoTexto from '../CampoTexto'
 import ListaSuspensa from '../ListaSuspensa'
 import Botao from '../Botao'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
-const Formulario = () => {
-
-    const times = [
-        'Programação',
-        'Front-End',
-        'Data Science',
-        'Devops',
-        'UX e Design',
-        'Mobile',
-        'Inovação e Gestão'
-    ]
+const Formulario = (props) => {
 
     const [nome , setNome] = useState('')
     const [cargo , setCargo] = useState('')
@@ -23,7 +13,12 @@ const Formulario = () => {
 
     const aoSalvar = (evento) => {
         evento.preventDefault()
-        console.log("Form foi submetido =>", nome, cargo, imagem, time)
+        props.aoColaboradorCadastrado({
+            nome,
+            cargo,
+            imagem,
+            time
+        })
     }
 
     return (
@@ -53,7 +48,7 @@ const Formulario = () => {
                 <ListaSuspensa 
                     obrigatorio={true} 
                     label="Time" 
-                    itens={times}
+                    itens={props.times}
                     valor = {time}
                     aoAlterado = {valor => setTime(valor)} 
                 />
@@ -70,3 +65,5 @@ export default Formulario
 
 //Se usasse onClick nao teria a validação do formulario
 //Usando o onSubmit eu consigo aplicar regras de preenchimento do formulario depois
+//Na função aoSalvar, eu to prevenindo o evento padrao de submit do JS, senao ele nao deixa eu executar o que eu quero. 
+//E nesse caso ele deixou de recarregar a pagina automaticamento quando clico no botao.
