@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Banner from './componentes/Banner/Banner';
 import Formulario from './componentes/Formulario'; // Prestar atenção aqui que se eu usar o nome de index.js dentro do componente, o proprio react vai entender quem tem que puxar na pasta.
+import Rodape from './componentes/Rodape';
 import Time from './componentes/Time';
 
 
@@ -60,8 +61,15 @@ function App() {
   return (
     <div className="App">
       <Banner />
-      <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado()} />
-      {times.map(time => <Time key={time.nome} nome = {time.nome} corPrimaria = {time.corPrimaria} corSecundaria = {time.corSecundaria}/>)}
+      <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado= {colaborador => aoNovoColaboradorAdicionado(colaborador)} />
+      {times.map(time => <Time 
+        key={time.nome} 
+        nome = {time.nome} 
+        corPrimaria = {time.corPrimaria} 
+        corSecundaria = {time.corSecundaria}
+        colaboradores = {colaboradores.filter(colaborador => colaborador.time === time.nome)}
+      />)}
+      <Rodape />
 
     </div>
   );
